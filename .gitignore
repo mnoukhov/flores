@@ -1,0 +1,8 @@
+data/
+data-bin/
+__pycache__
+*.swp
+floresv1/scripts/indic_nlp_library/
+experiments/
+logs/
+
