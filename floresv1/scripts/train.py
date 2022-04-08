@@ -70,7 +70,7 @@ def eval_bleu(src, tgt, subset, lenpen, databin, checkpoint, output, max_token=2
 
 def translate(src, tgt, model, lenpen, dest, data, max_token=12000):
     script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'translate.py')
-    check_call(f"""python {script_path} --data {data}\
+    call(f"""python {script_path} --data {data}\
         --source-lang {src} --target-lang {tgt} \
         --model {model} \
         --beam 5 --lenpen {lenpen} \
@@ -118,13 +118,21 @@ def main():
     parser.add_argument('--databin', '-d', required=True, help='initial databin')
     args = parser.parse_args()
 
+    wandb_name = os.environ['WANDB_NAME']
+    wandb_run_id = os.environ['WANDB_RUN_ID']
+    # wandb_run_id = "1700799"
+    os.environ['WANDB_RESUME'] = 'allow'
+
     configs = read_config(args.config)
-    workdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../experiments')
+    # workdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../experiments')
+    workdir = os.path.join(os.environ['DATA_ROOT'], 'floresv1.repro')
     #cuda_visible_devices=args.cuda_visible_devices or list(range(torch.cuda.device_count()))
 
     initial_databin = args.databin
     for i in range(len(configs)):
         (name, config) = configs[i]
+        os.environ['WANDB_NAME'] = f"floresv1_repro_{name}"
+        os.environ['WANDB_RUN_ID'] = f"{wandb_run_id}_{name}"
         src = config['src']
         tgt = config['tgt']
         direction = f"{src}-{tgt}"

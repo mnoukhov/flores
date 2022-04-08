@@ -32,15 +32,19 @@
           "--dropout 0.3",
           "--criterion label_smoothed_cross_entropy",
           "--label-smoothing 0.2",
-          "--max-tokens 4000",
+          "--max-tokens 16000",
           "--seed 1",
           "--log-format json",
           "--log-interval 100",
           "--max-epoch 100",
           "--save-interval 1",
-          "--no-epoch-checkpoints"
+          "--no-epoch-checkpoints",
+          "--wandb-project translation-game",
+          "--eval-bleu",
+          "--eval-bleu-detok moses",
+          "--eval-bleu-remove-bpe sentencepiece"
         ],
-        "gpu": 4
+        "gpu": 1
       },
       "translate": {
         "lenpen": 1.5,
@@ -83,16 +87,20 @@
           "--criterion label_smoothed_cross_entropy",
           "--label-smoothing 0.2",
           "--upsample-primary 7",
-          "--max-tokens 4000",
+          "--max-tokens 16000",
           "--seed 1",
           "--log-format json",
           "--log-interval 100",
           "--max-update 90000",
           "--save-interval-updates 2000",
           "--keep-interval-updates 1",
-          "--no-epoch-checkpoints"
+          "--no-epoch-checkpoints",
+          "--wandb-project translation-game",
+          "--eval-bleu",
+          "--eval-bleu-detok moses",
+          "--eval-bleu-remove-bpe sentencepiece"
         ],
-        "gpu": 8
+        "gpu": 2
       },
       "translate": {
         "lenpen": 0.8,
@@ -135,16 +143,20 @@
           "--criterion label_smoothed_cross_entropy",
           "--label-smoothing 0.2",
           "--upsample-primary 1",
-          "--max-tokens 4000",
+          "--max-tokens 16000",
           "--seed 1",
           "--log-format json",
           "--log-interval 100",
           "--max-update 120000",
           "--save-interval-updates 2000",
           "--keep-interval-updates 1",
-          "--no-epoch-checkpoints"
+          "--no-epoch-checkpoints",
+          "--wandb-project translation-game",
+          "--eval-bleu",
+          "--eval-bleu-detok moses",
+          "--eval-bleu-remove-bpe sentencepiece"
         ],
-        "gpu": 8
+        "gpu": 2
       },
       "translate": {
         "lenpen": 0.8,
